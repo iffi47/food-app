@@ -2,15 +2,16 @@ import { useRef } from 'react';
 
 import logoImage from "../assets/logo.jpg";
 import CartModal from "./CartModal.jsx";
+import Button from './UI/Button.jsx';
 
 export default function Header({ cart, onUpdateCartItemQuantity }) {
  // const modal = useRef();
 
  // const cartQuantity = cart.items.length;
 
- // function handleOpenCartClick() {
- //   modal.current.open();
- // }
+ function handleOpenCartClick() {
+  //  modal.current.open();
+ }
 
  // let modalActions = <button>Close</button>;
 
@@ -40,9 +41,9 @@ export default function Header({ cart, onUpdateCartItemQuantity }) {
      />
      <h1>IFFI Food</h1>
     </div>
-    <p>
-     {/* <button onClick={handleOpenCartClick}>Cart ({cartQuantity})</button> */}
-    </p>
+    <nav>
+      <Button onClick={handleOpenCartClick} textOnly={true}>Cart (0)</Button>
+    </nav>
    </header>
   </>
  );
