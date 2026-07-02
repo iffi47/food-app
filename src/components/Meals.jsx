@@ -22,12 +22,7 @@ export default function Meals() {
    {meals.map((meal) => (
     <MealItem
      key={meal.id}
-     id={meal.id}
-     image={meal.image}
-     title={meal.name}
-     price={meal.price}
-     description={meal.description}
-     onAddToCart={() => {}}
+     meal={meal}
     />
    ))}
   </ul>
