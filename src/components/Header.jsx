@@ -1,10 +1,15 @@
-import { useRef } from 'react';
+import { useContext, useRef } from 'react';
 
 import logoImage from "../assets/logo.jpg";
 import CartModal from "./CartModal.jsx";
 import Button from './UI/Button.jsx';
+import CartContext from '../store/CartContext.jsx';
 
 export default function Header({ cart, onUpdateCartItemQuantity }) {
+  const cartCtx = useContext(CartContext);
+  const totalCartItems = cartCtx.items.reduce((totalNumberOfItems, item) =>{
+    return totalNumberOfItems+item.quantity;
+  },0)
  // const modal = useRef();
 
  // const cartQuantity = cart.items.length;
@@ -42,7 +47,7 @@ export default function Header({ cart, onUpdateCartItemQuantity }) {
      <h1>IFFI Food</h1>
     </div>
     <nav>
-      <Button onClick={handleOpenCartClick} textOnly={true}>Cart (0)</Button>
+      <Button onClick={handleOpenCartClick} textOnly={true}>Cart ({totalCartItems})</Button>
     </nav>
    </header>
   </>
