@@ -7,12 +7,14 @@ export default function Input({isTextarea, type, label, errorMessage, id, error,
       <input
        id={id}
        type={type}
+       name={id}
        {...props}
       />
      )}
      {isTextarea && (
       <textarea
        id={id}
+       name={id}
        {...props}
       />
      )}
