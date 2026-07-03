@@ -2,12 +2,13 @@ import {  createContext, useReducer } from "react";
 
 //REDUCER Function
 function cartReducer(state, action) {
- const existingCartItemIndex = state.items.findIndex(
-  (item) => item.id === action.item.id,
- );
- const updatedItems = [...state.items];
- const existingItem = state.items[existingCartItemIndex];
  if (action.type === "ADD_ITEM") {
+  const existingCartItemIndex = state.items.findIndex(
+   (item) => item.id === action.item.id,
+  );
+  const updatedItems = [...state.items];
+  const existingItem = state.items[existingCartItemIndex];
+
   if (existingCartItemIndex > -1) {
    const updatedItem = {
     ...existingItem,
@@ -20,16 +21,29 @@ function cartReducer(state, action) {
   return { ...state, items: updatedItems };
  }
  if (action.type === "REMOVE_ITEM") {
+  const existingCartItemIndex = state.items.findIndex(
+   (item) => item.id === action.item.id,
+  );
+  const updatedItems = [...state.items];
+  const existingItem = state.items[existingCartItemIndex];
+
+  if (!existingItem) {
+   return state;
+  }
+
   if (existingItem.quantity === 1) {
    updatedItems.splice(existingCartItemIndex, 1);
   } else {
    const updatedItem = {
     ...existingItem,
-    quantity: existingItem.quantity--,
+    quantity: existingItem.quantity - 1,
    };
    updatedItems[existingCartItemIndex] = updatedItem;
   }
   return { ...state, items: updatedItems };
+ }
+ if (action.type === "CLEAR_CART") {
+  return { ...state, items: [] };
  }
  return state;
 }
@@ -39,25 +53,32 @@ const CartContext = createContext({
  items: [],
  addItem: (item) => {},
  removeItem: (id) => {},
+ clearCart: () => {},
 });
 
 //Context Provider Function
 export function CartContextProvider({ children }) {
- const [cart, dispatchCartAction]=useReducer(cartReducer, { items: [] });
+ const [cart, dispatchCartAction] = useReducer(cartReducer, { items: [] });
 
- function addItem(item){
-  dispatchCartAction({type:"ADD_ITEM", item})
+ function addItem(item) {
+  dispatchCartAction({ type: "ADD_ITEM", item });
  }
- function removeItem(item){
-  dispatchCartAction({type: "REMOVE_ITEM", item})
+ function removeItem(item) {
+  dispatchCartAction({ type: "REMOVE_ITEM", item });
  }
- const cartContext= {
+ function clearCart() {
+  dispatchCartAction({ type: "CLEAR_CART" });
+ }
+ const cartContext = {
   items: cart.items,
   addItem,
-  removeItem
- }
+  removeItem,
+  clearCart,
+ };
 
- return <CartContext.Provider value={cartContext}>{children}</CartContext.Provider>;
+ return (
+  <CartContext.Provider value={cartContext}>{children}</CartContext.Provider>
+ );
 }
 
 export default CartContext;
