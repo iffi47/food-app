@@ -10,16 +10,16 @@ const CartModal = forwardRef(function CartModalComponent(
  const cartCtx = useContext(CartContext);
  const [isOpen, setIsOpen] = useState(false);
  const items = cartCtx?.items ?? [];
+ const totalPrice = items.reduce(
+  (acc, item) => acc + item.price * item.quantity,
+  0,
+ );
+ const formattedTotalPrice = `$${totalPrice.toFixed(2)}`;
 
  useImperativeHandle(ref, () => ({
   open: () => setIsOpen(true),
   close: () => setIsOpen(false),
  }));
-
- const totalPrice = items.reduce(
-  (acc, item) => acc + item.price * item.quantity,
-  0,
- );
 
  return (
   <Modal
@@ -39,11 +39,13 @@ const CartModal = forwardRef(function CartModalComponent(
      ))}
     </ul>
    )}
+   <p id="cart-total">
+    Cart Total: <strong>{formattedTotalPrice}</strong>
+   </p>
    <form
     method="dialog"
-    id="modal-actions" 
-    className="modal-actions"
-    >
+    id="modal-actions"
+    className="modal-actions">
     {actions}
    </form>
   </Modal>

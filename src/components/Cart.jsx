@@ -2,12 +2,11 @@ import { useContext } from "react";
 import CartContext from "../store/CartContext";
 import Button from "./UI/Button";
 
-export default function Cart({ item, onUpdateItemQuantity, totalPrice }) {
+export default function Cart({ item, onUpdateItemQuantity }) {
  const { removeItem, addItem } = useContext(CartContext);
  const price = Number(item?.price ?? 0);
  const formattedPrice = `$${price.toFixed(2)}`;
- const total = Number(totalPrice ?? 0);
- const formattedTotalPrice = `$${total.toFixed(2)}`;
+
 
  return (
   <>
@@ -22,9 +21,6 @@ export default function Cart({ item, onUpdateItemQuantity, totalPrice }) {
      <Button textOnly onClick={() => addItem(item)}>+</Button>
     </div>
    </li>
-   <p id="cart-total">
-    Cart Total: <strong>{formattedTotalPrice}</strong>
-   </p>
   </>
  );
 }
