@@ -21,9 +21,7 @@ export default function Header({ onUpdateCartItemQuantity }) {
   }
   function handleCloseCartModal(){
     console.log("In checkouit");
-    
-   modal.current.open();
-  // modal.current.close();
+    userProgressCtx.showCheckout();
  }
 
  let modalActions = <Button>Close</Button>;

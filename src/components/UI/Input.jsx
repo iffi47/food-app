@@ -16,7 +16,7 @@ export default function Input({isTextarea, type, label, errorMessage, id, error,
        {...props}
       />
      )}
-     <div className="error">{error && <p>{errorMessage}</p>}</div>
+     {error && <div className="error">{error && <p>{errorMessage}</p>}</div>}
     </div>
    </>
   );
