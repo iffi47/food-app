@@ -1,4 +1,4 @@
-import { act, createContext, useReducer } from "react";
+import {  createContext, useReducer } from "react";
 
 //REDUCER Function
 function cartReducer(state, action) {

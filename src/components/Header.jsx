@@ -5,39 +5,39 @@ import CartModal from "./CartModal.jsx";
 import Button from './UI/Button.jsx';
 import CartContext from '../store/CartContext.jsx';
 
-export default function Header({ cart, onUpdateCartItemQuantity }) {
+export default function Header({ onUpdateCartItemQuantity }) {
   const cartCtx = useContext(CartContext);
   const totalCartItems = cartCtx.items.reduce((totalNumberOfItems, item) =>{
     return totalNumberOfItems+item.quantity;
   },0)
- // const modal = useRef();
+ const modal = useRef();
 
- // const cartQuantity = cart.items.length;
+ const cartQuantity = cartCtx.items.length;
 
  function handleOpenCartClick() {
-  //  modal.current.open();
+   modal.current.open();
  }
 
- // let modalActions = <button>Close</button>;
+ let modalActions = <button>Close</button>;
 
- // if (cartQuantity > 0) {
- //   modalActions = (
- //     <>
- //       <button>Close</button>
- //       <button>Checkout</button>
- //     </>
- //   );
- // }
+ if (cartQuantity > 0) {
+   modalActions = (
+     <>
+       <Button textOnly>Close</Button>
+       <Button>Checkout</Button>
+     </>
+   );
+ }
 
  return (
   <>
-   {/* <CartModal
+   <CartModal
         ref={modal}
-        cartItems={cart.items}
+        cartItems={cartCtx.items}
         onUpdateCartItemQuantity={onUpdateCartItemQuantity}
         title="Your Cart"
         actions={modalActions}
-      /> */}
+      />
    <header id="main-header">
     <div id="title">
      <img
