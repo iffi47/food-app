@@ -41,7 +41,9 @@ const CartModal = forwardRef(function CartModalComponent(
    )}
    <form
     method="dialog"
-    id="modal-actions">
+    id="modal-actions" 
+    className="modal-actions"
+    >
     {actions}
    </form>
   </Modal>

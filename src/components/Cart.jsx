@@ -22,7 +22,7 @@ export default function Cart({ item, onUpdateItemQuantity, totalPrice }) {
      <Button textOnly onClick={() => addItem(item)}>+</Button>
     </div>
    </li>
-   <p id="cart-total-price">
+   <p id="cart-total">
     Cart Total: <strong>{formattedTotalPrice}</strong>
    </p>
   </>
